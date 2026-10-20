@@ -10,9 +10,9 @@ Your Fast 50 is the first 50 people you talk to about your raise, and the best o
 
 1. Open Claude on the web or in the desktop app and sign in.
 2. In the left sidebar, open **Customize**, then **Plugins**.
-3. Press **Add**, then **Add marketplace**.
-4. Paste this link and confirm: **https://github.com/chad-m1realcapital/marcinai-plugin**
-5. The marketplace shows one plugin, **MarcinAI**. Open it and press **Add**. It now sits under **Your plugins**, switched on.
+3. Press **Add**, then **Add marketplace**, then **Add from a repository**.
+4. Paste this link and press **Sync**: **https://github.com/chad-m1realcapital/marcinai-plugin**
+5. **MarcinAI** appears under **Your plugins**; search "MarcinAI" if you don't see it. Open it and press **Add**. Claude says it is installed and ready to use.
 6. If M1 sent the plugin as a file instead: **Add**, then **Upload plugin**, and choose the file.
 
 ## 2. Turn on the connectors and file creation
