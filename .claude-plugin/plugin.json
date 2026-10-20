@@ -1,0 +1,7 @@
+{
+  "name": "marcinai",
+  "displayName": "MarcinAI",
+  "version": "1.0.0",
+  "description": "Build your Fast 50 for MarcinAI: one ranked spreadsheet of the people you already know who could invest, partner, or open doors, built from your own Gmail, Google Calendar, and a LinkedIn or contacts export. Read-only on mail and calendar; nothing leaves your Claude account except the file you download.",
+  "author": { "name": "M1 Real Capital" }
+}
