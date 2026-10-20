@@ -1,11 +1,13 @@
 {
   "name": "m1-real-capital",
   "description": "MarcinAI plugins for Claude from M1 Real Capital.",
-  "owner": { "name": "M1 Real Capital" },
+  "owner": {
+    "name": "M1 Real Capital"
+  },
   "plugins": [
     {
       "name": "marcinai",
-      "source": ".",
+      "source": "./plugins/marcinai",
       "description": "Build my Fast 50: a ranked spreadsheet of the people you already know who could invest, partner, or open doors, from your own Gmail, Google Calendar, and a LinkedIn or contacts export. Read-only; the only output is the file you download."
     }
   ]
