@@ -1,6 +1,6 @@
 # Search playbook: mail and calendar, the last 24 months
 
-Read this at step 2 of SKILL.md. It holds the exact queries, the paging rules, and what to write down per thread and per event so the ledger ends up right.
+Read this at step 3 of SKILL.md. It holds the exact queries, the paging rules, and what to write down per thread and per event so the ledger ends up right. Gmail and Google Calendar come first; business Outlook through Microsoft 365 has its own section near the end.
 
 ## The window
 
@@ -134,3 +134,17 @@ A person counts when a human wrote in their own words and, ideally, the client w
 - Colleagues: people at the client's own company domain, inferred from the client's address unless it is a public mail provider. They are the client's team, not their investors. Say how many were skipped; if the client wants them back, `ledger.py restore` returns them one by one, or rerun clean with `--no-colleague-rule`.
 
 Then look through what is left with your own judgment. Vendors (a contractor, a title company rep, an insurance agent) are real people the filter keeps. They are not junk, and they are not investors either: judge them Low with a one-line reason, or drop them with `ledger.py drop` when they are clearly service providers with no relationship beyond the invoice. Notetaker and scheduling bots that slipped through under a personal-looking name get dropped too.
+
+## Business Outlook through Microsoft 365
+
+Use this section when the client connected Microsoft 365 instead of Gmail. Claude's Microsoft 365 connector is read-only by default and exposes an Outlook email search, an Outlook calendar search, and a reader for a single item. Read each tool's own parameter description before the first call; the shape below is what to aim for, and the tool's own fields win where they differ.
+
+- **The window.** The same 24 months. If the search takes date fields, set them to the window. If it takes a query string, Outlook's search language accepts `received>=YYYY-MM-DD`.
+- **The sets.** Run the same topic sets A to H, but as shorter searches: two to four of the set's words per search (for example `investor OR LP OR "limited partner"`, then `capital OR raise OR fund`), because Outlook search ranks rather than filters and long OR chains dilute it. Set F (what the client wrote) is a search of Sent Items with the same words.
+- **No category tabs.** Outlook has no Promotions or Updates tabs, so expect more automated mail in the results. The `ledger.py clean` step removes most of it; be quicker to skip obvious newsletters while you note observations.
+- **Paging and caps.** Follow the tool's paging the same way, with the same caps (8 pages a set, about 30 in all) and the same stop rule (a page that adds fewer than 3 new people ends the set).
+- **Observations.** One per conversation. Use the conversation id as `id` when the result carries one, otherwise the message id. `people` comes from the sender and the To and Cc lines; `wrote: true` for the sender. `you_wrote` is true for anything in Sent Items or sent from one of the client's addresses.
+- **The calendar.** Use the Outlook calendar search over the window, with the same rules as Google Calendar: 1 to 14 other attendees, no all-day, out of office, focus or declined events, nothing with 15 or more people. One observation per event.
+- **Opening an item.** Same reasons as `get_thread`: to confirm who someone is, to see whether an exchange was two-way, or to settle a borderline topic. Nothing from the body goes into the file.
+
+If the connector refuses a search or returns an error twice, stop the mail sweep, tell the client in one plain line that Outlook would not answer, and build from their Outlook contacts export instead (SKILL.md step 1, Path C in `talking-to-the-client.md`).

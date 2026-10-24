@@ -1,6 +1,6 @@
 # Ranking, fit, and the two lines per person
 
-Read this at step 6 of SKILL.md. The scripts compute relationship strength from the counts in the ledger; you judge fit against the investor profile and write the "why" and the "angle". This file says how both work so the file reads the same way every time.
+Read this at step 7 of SKILL.md. The scripts compute relationship strength from the counts in the ledger; you judge fit against the investor profile and write the "why" and the "angle". This file says how both work so the file reads the same way every time.
 
 ## Why relationship weighs more than fit
 
@@ -36,12 +36,12 @@ Labels, in this order of checks:
 
 ## Fit (judged by you)
 
-Judge each person against the profile from step 1: what the client is raising for, who the ideal investor is, who it is not for. Use what the threads and meetings showed, the title and company, and the past-investor signal.
+Judge each person against the profile from step 2: what the client is raising for, who the ideal investor is, who it is not for. Use what the threads and meetings showed, the title and company, and the past-investor signal.
 
 - **High** (40 points): evidence they invest or deploy capital (an LP, wrote a check, asked about returns or terms, runs a fund or family office, a capital or equity partner, a co-GP), or they match the ideal investor closely (the profession, the means, the stated interest), or they have invested with the client before. Past investors are always High.
 - **Medium** (25 points): plausible. A senior professional, a business owner, someone industry adjacent, someone who asked about the business once, or a connector with reach into the people the client wants (brokers, attorneys, CPAs, wealth advisors, community leaders).
 - **Low** (0 points, and relationship points halved): a real contact who does not fit, including anyone the "not for" answer rules out, and service providers the filter kept (a contractor, a title rep). Say why in the "why" line so the client sees the decision. Low fit people stay in the file, at the bottom.
-- **Unknown** (12 points): not enough to judge. Use it rather than guessing; the overnight ranking in MarcinAI gets another look at everyone.
+- **Unknown** (12 points): not enough to judge. Use it rather than guessing.
 
 Judge the people with mail or calendar history yourself, every one of them; that is the point of the plugin. Export-only people get a first pass from `parse_exports.py` (the title and company), and you confirm or change the ones near the top. People from the export whose title says nothing stay out of the file unless the client asks for all of them (`--all-exports`); the export itself can go into MarcinAI directly.
 

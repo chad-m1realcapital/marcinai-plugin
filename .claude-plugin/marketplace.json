@@ -8,7 +8,7 @@
     {
       "name": "marcinai",
       "source": "./plugins/marcinai",
-      "description": "Build my Fast 50: a ranked spreadsheet of the people you already know who could invest, partner, or open doors, from your own Gmail, Google Calendar, and a LinkedIn or contacts export. Read-only; the only output is the file you download."
+      "description": "Build my Fast 50: a ranked spreadsheet of the people you already know who could invest, partner, or open doors, from your own Gmail and Google Calendar or business Outlook, plus any LinkedIn or contacts file. Read-only; the only output is the file you download."
     }
   ]
 }

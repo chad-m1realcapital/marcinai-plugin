@@ -1,12 +1,12 @@
 # Files and formats
 
-Read this when you handle an attached export (step 4), when you build the file (step 7), or when a script complains about its input.
+Read this when you handle an attached export (step 5), when you build the file (step 8), or when a script complains about its input.
 
 ## Where files are
 
 - In chat on claude.ai and the desktop app, a file the client attaches lands under `/mnt/user-data/uploads/`. Save the finished spreadsheet under `/mnt/user-data/outputs/` so the chat offers it for download.
 - In Cowork, attached files and outputs sit in the task's folder; save the spreadsheet where the task puts files for the person.
-- The skill's scripts are in this skill's `scripts/` folder. In Claude Code and Cowork, `${CLAUDE_SKILL_DIR}/scripts/` points there. In chat, the whole skill folder is copied into the sandbox; if the placeholder is not filled in, find it once with `find / -name ledger.py -path "*build-my-fast-50*" 2>/dev/null | head -1`.
+- The skill's scripts are in this skill's `scripts/` folder. In Claude Code and Cowork, `${CLAUDE_SKILL_DIR}/scripts/` points there. When the client started from the MarcinAI button, you cloned the plugin from GitHub and the scripts are under `marcinai-plugin/plugins/marcinai/skills/build-my-fast-50/scripts/`. Otherwise find them once with `find / -name ledger.py -path "*build-my-fast-50*" 2>/dev/null | head -1`.
 - Working files (people.json, observations.json, judgments.json, exports.json) stay in the sandbox's working folder. They are not deliverables and never leave the chat.
 
 ## Export formats the parser reads
@@ -18,7 +18,10 @@ Read this when you handle an attached export (step 4), when you build the file (
 | LinkedIn connections | Settings and Privacy, Data privacy, Get a copy of your data, Connections (desktop only, arrives by email in minutes) | `First Name, Last Name, URL, Email Address, Company, Position, Connected On`, with three note lines above the header. Email is blank for most connections; that is LinkedIn's privacy setting, not a parser miss. |
 | Google Contacts | Google Contacts, Export, Google CSV | Newer files: `First Name, Last Name, Organization Name, Organization Title, E-mail 1 - Value`. Older files: `Given Name, Family Name, Organization 1 - Name, Organization 1 - Title, E-mail 1 - Value`. Both are handled. |
 | Outlook | Outlook, File, Open and Export, Import/Export, Export to a file, Comma Separated Values | `First Name, Last Name, Company, Job Title, E-mail Address` |
-| iPhone through iCloud | iCloud.com, Contacts, select all, Export vCard | A `.vcf` file with `FN`, `N`, `EMAIL`, `ORG`, `TITLE` |
+| Outlook.com and Outlook on the web | People, Manage contacts, Export contacts, All contacts, Export | The same Outlook columns. Its `Title` column holds Mr., Dr. and the like; the parser ignores those. |
+| Yahoo | Yahoo Mail, Contacts, the three dots, Export to CSV file | `First, Last, Email, Title, Company` among others |
+| AOL | AOL Mail, Contacts, More, Export | A CSV with name and email columns |
+| iPhone through iCloud | icloud.com/contacts, the actions button, Select All Contacts, the share button, Export vCard | A `.vcf` file with `FN`, `N`, `EMAIL`, `ORG`, `TITLE` |
 | Any spreadsheet | | Any CSV with a column that looks like a name and one that looks like an email |
 
 Excel files (`.xlsx`) from the client: convert to CSV first (`python3 -c "import openpyxl, csv, sys; ..."`, or ask the client to save as CSV) and then run the parser.
@@ -78,14 +81,15 @@ One sheet, called Fast 50, bold header row, frozen, filterable. Exactly these co
 | Suggested angle | One line, the first move. |
 | Source | Mail, Calendar, LinkedIn export, Google export, Outlook export, Phone export, Contacts export, joined with " + " when several. |
 
-Everyone who survived cleaning is in the file, best first; the top of the list is the Fast 50 and MarcinAI picks the 50 after its own overnight pass. No message text, no subjects, no URLs, no phone numbers, no notes about anyone beyond the two lines.
+Everyone who survived cleaning is in the file, best first; the top of the list is the Fast 50. No message text, no subjects, no URLs, no phone numbers, no notes about anyone beyond the two lines.
 
 ## The chat summary, after the file
 
-Keep it short and name no email contents. The shape:
+Keep it short, plain, and name no email contents. The client may be new to all of this, so no jargon and no numbers they did not need. The shape:
 
-- Done. 184 people: 131 from mail, 44 from your calendar, 38 added from your LinkedIn export (52 others in the export had no history or profile match; upload the export itself in MarcinAI if you want them all).
-- Top of the list: ten names with Relationship and Fit.
-- Skipped: 212 automated senders and services, 9 colleagues at yourfirm.com (say the word and I will add them back).
-- Window: mail and calendar from 2024-10-13 to today. Mailbox cap hit or not.
-- Next: in MarcinAI, open Lead generation, choose Add contacts, upload this file. Your list is ranked again overnight against your investor profile and shows up under Fast 50.
+- "Your list is ready: 184 people. 131 came from your email, 44 from your calendar, and 38 from your LinkedIn file."
+- "The top ten:" then ten lines, each a name with a few plain words, for example "Jane Doe, you know her well, strong fit".
+- "I left out 212 automated senders and 9 people at your own company. Tell me if you want any of them back."
+- When a cap was hit: "Your mailbox is big, so I read the most relevant two years of deal and investor email."
+
+Then the upload steps from step 9 of SKILL.md, word for word or close to it.

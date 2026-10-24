@@ -112,6 +112,9 @@ def find_header_line(text):
     return text
 
 
+HONORIFICS = {"mr", "mrs", "ms", "miss", "mx", "dr", "prof", "rev", "sir", "madam"}
+
+
 def col(row, *names):
     """First non-empty value among candidate column names, matched case-insensitively."""
     lowered = {k.strip().lower(): v for k, v in row.items() if k}
@@ -136,8 +139,8 @@ def parse_csv(path, extra_words):
         source = "Contacts export"
     people = []
     for row in reader:
-        first = col(row, "First Name", "Given Name")
-        last = col(row, "Last Name", "Family Name")
+        first = col(row, "First Name", "Given Name", "First")
+        last = col(row, "Last Name", "Family Name", "Last")
         name = squash(f"{first} {last}") or col(row, "Name", "Full Name", "Display Name")
         email = norm_email(col(row, "Email Address", "E-mail Address", "E-mail 1 - Value", "E-mail 2 - Value",
                                 "E-mail 2 Address", "E-mail 3 Address", "Email", "Email 1", "Primary Email", "Work Email"))
@@ -149,6 +152,9 @@ def parse_csv(path, extra_words):
                     break
         company = col(row, "Company", "Organization Name", "Organization 1 - Name", "Organization", "Employer", "Company Name")
         title = col(row, "Position", "Job Title", "Organization Title", "Organization 1 - Title", "Title", "Role")
+        if title.lower().rstrip(".") in HONORIFICS:
+            # Outlook and Yahoo put Mr., Dr. and the like in a column called Title; that is not a job title.
+            title = ""
         connected = iso(col(row, "Connected On", "Connected", "Date Added"))
         if not name and not email:
             continue
