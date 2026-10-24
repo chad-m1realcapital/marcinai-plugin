@@ -6,9 +6,20 @@ The rules from SKILL.md, once more: one question per card, two to four choices, 
 
 If you have no multiple-choice card tool, ask the same question in one short line and list the choices on separate lines, numbered, so they can reply with a number.
 
+## Card 0: the email that is already connected
+
+Show this when mail tools are already in the chat, so you never read the wrong mailbox.
+
+- Question: "Your email is already connected to Claude. Is it the email you use for business?"
+- Choices:
+  - "Yes, that's my business email"
+  - "No, my business email is somewhere else"
+
+"No": go to Card 1 and connect the right one.
+
 ## Card 1: where their email lives
 
-Show this only when no mail tools are in the chat.
+Show this when no mail tools are in the chat, or after "No" on Card 0.
 
 - Question: "Where is your business email?"
 - Choices:
@@ -17,7 +28,7 @@ Show this only when no mail tools are in the chat.
   - "Outlook.com, Hotmail, Yahoo, AOL or iCloud"
   - "Not sure"
 
-"Not sure": ask them to type the end of their business email address (the part after the @). Gmail.com or a company address they open in Gmail means Gmail. A company address they open in Outlook means Outlook through their business. Outlook.com, hotmail.com, live.com, msn.com, yahoo.com, aol.com, icloud.com and me.com mean the export path.
+"Not sure": ask with one card, "When you read your business email on your computer, what does it say at the top of the screen?" Choices: "Gmail" / "Outlook" / "Neither". Gmail means Path A. Outlook means Path B, unless their address ends in outlook.com, hotmail.com, live.com or msn.com, which means Path C. Neither means Path C; if they use Apple Mail or another app, ask them to type the part of their email address after the @, and yahoo.com, aol.com, icloud.com and me.com also mean Path C.
 
 ## Path A: Gmail
 
@@ -25,7 +36,7 @@ If you have a tool that puts a Connect button for a connector right in the chat,
 
 Otherwise, one message at a time:
 
-1. "Open this page in a new tab: claude.ai/customize/connectors. It's Claude's list of connections. Keep this chat open."
+1. "Click this link. It opens Claude's list of connections in a new tab: https://claude.ai/customize/connectors. Keep this chat open."
 2. "Find **Gmail** and press **Connect**. Sign in with the Google account you use for business, then press **Allow**. When it worked, the button says Disconnect."
 3. "Now do the same for **Google Calendar** on that page."
 4. "Come back to this tab." Then the card below.
@@ -37,7 +48,7 @@ Card: "Did Gmail and Google Calendar connect?"
 
 "Yes": check for the Gmail and Calendar tools. If they are not here yet, one more step: "Press the **+** button at the lower left of the message box, choose **Connectors**, and switch on **Gmail** and **Google Calendar**." Then check again.
 
-"It didn't work": ask, with a card, what they saw ("Google said I can't sign in" / "I couldn't find Gmail on the page" / "Something else"). A company Google account can block outside apps; if that is it, say so plainly and move them to the contacts export (Path C, Google Contacts). Claude's Gmail connector needs a paid Claude plan; on a Team or Enterprise plan an Owner turns it on for the company first.
+"It didn't work": ask, with a card, what they saw ("Google said I can't sign in" / "I couldn't find Gmail on the page"); they can type anything else. A company Google account can block outside apps; if that is it, say so plainly and move them to the contacts export (Path C, Google Contacts). Claude's Gmail connector needs a paid Claude plan; on a Team or Enterprise plan the company's Claude owner adds it for the company first.
 
 ## Path B: Outlook through their business (Microsoft 365)
 
@@ -45,14 +56,19 @@ If you have a tool that puts a Connect button for a connector right in the chat,
 
 Otherwise, one message at a time:
 
-1. "Open this page in a new tab: claude.ai/customize/connectors. Keep this chat open."
+1. "Click this link. It opens Claude's list of connections in a new tab: https://claude.ai/customize/connectors. Keep this chat open."
 2. "Find **Microsoft 365** and press **Connect**. Sign in with your work email and password, then press **Accept**."
 3. "Come back to this tab." Then the card below.
 
 Card: "Did Microsoft 365 connect?"
 - "Yes, it's connected"
 - "It says an administrator has to approve it"
+- "It didn't work"
 - "Skip it, use a contacts file instead"
+
+"It didn't work": ask, with a card, what they saw ("I couldn't find Microsoft 365 on the page" / "Microsoft wouldn't let me sign in"); they can type anything else. On a Team or Enterprise Claude plan, Microsoft 365 only shows on that page after the company's Claude owner adds it. A sign-in Microsoft refuses usually means a company rule; offer the contacts file (Path C) so they are not stuck.
+
+Microsoft's approval screen lists everything the Microsoft 365 connection can do, including sending. If they ask, say: "That list is everything Claude could be allowed to do. MarcinAI only reads your email and calendar. It never sends, changes or deletes anything."
 
 "Yes": check for the Outlook email and calendar tools. If they are not here, give the + button step from Path A with **Microsoft 365** instead.
 
@@ -61,20 +77,19 @@ Card: "Did Microsoft 365 connect?"
 - "Someone else runs it, I'll send them the steps"
 - "Use a contacts file for now"
 
-For the owner: Microsoft calls them the Global Administrator. If that is the client, they press Connect again while signed in as that administrator, and Microsoft shows a box to approve it for the organization; tick it and accept. If it still fails, send them to Anthropic's page for the full admin steps: https://support.claude.com/en/articles/12542951. For someone else: give them that same link to forward. Either way, offer to build the list from an Outlook contacts export now, so they are not stuck waiting.
+First offer the contacts file (Path C, Outlook on the web) so they are not stuck waiting. Then, for the owner: Microsoft calls them the Global Administrator. If that is the client, they press Connect again while signed in as that administrator, and Microsoft shows a box to approve it for the organization; tick it and accept. For someone else, or if it still fails: "Forward this link to whoever set up your company email. It has the steps for them: https://support.claude.com/en/articles/12542951"
 
 Personal Outlook.com, Hotmail, Live and MSN accounts cannot connect. They go to Path C.
 
 ## Path C: a contacts file instead
 
-Ask which service, with a card: "Where are your contacts?" with the services that fit what they told you (Outlook.com or Outlook on the web; Outlook on my computer; Google Contacts; Yahoo; AOL; iPhone, through iCloud). Then the steps for that one, one message at a time. Tell them to do this on a computer.
+Ask which service, with a card: "Where are your contacts?" with up to four services that fit what they told you (Outlook; Google Contacts; Yahoo; AOL; iPhone, through iCloud). Then the steps for that one, one message at a time. Tell them to do this on a computer.
 
-- **Outlook.com or Outlook on the web:** open Outlook in the browser, select the **People** icon on the left, choose **Manage contacts**, then **Export contacts**, pick **All contacts**, press **Export**. The file lands in Downloads.
-- **Outlook on their computer (classic):** **File**, **Open & Export**, **Import/Export**, **Export to a file**, **Comma Separated Values**, then pick **Contacts** and save.
-- **Google Contacts:** open contacts.google.com, press **Export** on the left, choose **Google CSV**, press **Export**.
+- **Outlook, any kind:** do it in the browser, whatever Outlook they use day to day. Work email: https://outlook.office.com. Outlook.com, Hotmail, Live or MSN: https://outlook.live.com. Sign in, select the **People** icon in the side panel, then on the toolbar choose **Manage contacts**, then **Export contacts**, pick **All contacts**, press **Export**. The file lands in Downloads.
+- **Google Contacts:** open https://contacts.google.com, tick the box next to any contact, use the **Selection actions** box at the top left and choose **All**, then press **More actions** (the three dots at the top right), choose **Export**, pick **Google CSV**, and press **Export**.
 - **Yahoo:** in Yahoo Mail, open **Contacts**, press the three dots (**More**), choose **Export to CSV file**. If Yahoo refuses, a contact with unusual characters in the name is usually the cause.
 - **AOL:** in AOL Mail, open **Contacts**, choose **More**, then **Export**. AOL's help page: https://help.aol.com/articles/add-edit-or-delete-contacts-in-aol-mail
-- **iPhone, through iCloud:** open icloud.com/contacts on a computer and sign in, press the actions button at the top of the list and choose **Select All Contacts**, then the share button, then **Export vCard**.
+- **iPhone, through iCloud:** open https://www.icloud.com/contacts on a computer and sign in, press the actions button at the top of the list and choose **Select All Contacts**, then the share button, then **Export vCard**.
 
 Then: "Now come back here, press the **+** button at the lower left of the message box, choose to add a file, and pick the file you just downloaded." Wait for the file.
 
@@ -86,11 +101,11 @@ Offer once, right after the profile is settled, whether or not their email is co
 
 - Question: "Want to add your LinkedIn connections too?"
 - Choices:
-  - "I have my LinkedIn file, I'll attach it"
+  - "I have my LinkedIn file, I'll attach it" (LinkedIn's .zip, or the Connections.csv inside it, both work)
   - "Not now"
   - "Show me how to get it"
 
-"Show me how": on a computer, on LinkedIn press **Me** (their photo, top right), then **Settings & Privacy**, **Data privacy**, **Get a copy of your data**, pick **Connections** (or the larger archive if Connections is not offered), press **Request archive**. LinkedIn emails a link when the file is ready, which can take from a few minutes to a day. Then say: "We don't need to wait. I'll build your list from your email now, and when LinkedIn's email arrives you can upload that file in MarcinAI with Add contacts."
+"Show me how": on a computer, on LinkedIn press **Me** (their photo, top right), then **Settings & Privacy**, **Data privacy**, **Get a copy of your data**, pick **Connections** (or the larger archive if Connections is not offered), press **Request archive**. LinkedIn emails a link when the file is ready, which can take from a few minutes to a day. The file is a .zip. Then say: "We don't need to wait. I'll build your list from your email now. When LinkedIn's email arrives, double-click the zip file to open it, and upload the file inside called Connections.csv in MarcinAI with Add contacts."
 
 ## Card 3: confirm the profile from MarcinAI
 
@@ -108,18 +123,18 @@ When the opening message carried "My investor profile from MarcinAI", the short 
 One card each, in this order. Build the choices from anything they already told you.
 
 4. "What are you raising for right now?" - "A deal I'm buying" / "A fund" / "Both" / "Not sure yet"
-5. "What kind of property?" (multiple choice allowed) - "Apartments" / "Self storage" / "Industrial" / "Something else" (they type it). If they mention a market, keep it.
+5. "What kind of property?" (multiple choice allowed) - "Apartments" / "Self storage" / "Industrial" / "Retail or office". They can type anything else. If they mention a market, keep it.
 6. "About how much are you raising?" - "Under $1 million" / "$1 to $5 million" / "$5 to $20 million" / "More than $20 million"
 7. "Who are your best investors?" (multiple choice allowed) - "People who've invested with me before" / "Doctors and other high earners" / "Business owners" / "Friends and family"
 8. "Who is this not for?" (multiple choice allowed) - "People who aren't accredited" / "People who need their money back soon" / "Nobody, keep everyone"
 
-Then the one line from step 2 of SKILL.md and start the sweep.
+Then Card 2 (LinkedIn), then the one line from step 2 of SKILL.md, and start the sweep.
 
 ## While you work
 
 One line before the sweep, and at most one short line every few minutes after that. Examples:
 
-- "Reading your email from the last two years. This takes a few minutes."
+- "Reading your email from the last two years. On a busy inbox this takes a while, so keep this tab open."
 - "Halfway there. I've found about 120 people so far."
 - "Now your calendar."
 - "Ranking everyone against your investor profile. Almost done."

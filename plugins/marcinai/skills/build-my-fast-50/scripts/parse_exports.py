@@ -19,6 +19,10 @@ professionals, owners and the client's own keywords; "" when nothing matched.
 Claude confirms or changes it for the people who matter; build_fast50.py uses it
 to decide which export-only people belong in the file.
 
+LinkedIn sends its data as a .zip. Pass the zip as it is: only the Connections.csv
+inside it is read. Every other file in LinkedIn's archive (messages, invitations,
+profile) is left unopened, because those carry message text and never belong here.
+
 Formats recognized: LinkedIn Connections.csv (First Name, Last Name, URL,
 Email Address, Company, Position, Connected On), Google Contacts CSV (both the
 older "Organization 1 - Name" layout and the newer "Organization Name" layout),
@@ -34,6 +38,8 @@ import io
 import json
 import re
 import sys
+import tempfile
+import zipfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -229,9 +235,27 @@ def dedupe(people):
     return list(seen.values())
 
 
+def parse_linkedin_zip(path, extra_words):
+    """LinkedIn's archive: read Connections.csv and nothing else in it."""
+    try:
+        zf = zipfile.ZipFile(path)
+    except zipfile.BadZipFile:
+        print(f"{path.name}: not a readable zip file", file=sys.stderr)
+        return []
+    with zf:
+        names = [n for n in zf.namelist() if Path(n).name.lower() == "connections.csv" and not n.endswith("/")]
+        if not names:
+            print(f"{path.name}: no Connections.csv inside; ask for the LinkedIn file again with Connections ticked", file=sys.stderr)
+            return []
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp) / "Connections.csv"
+            target.write_bytes(zf.read(sorted(names, key=len)[0]))
+            return parse_csv(target, extra_words)
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Read LinkedIn and contacts exports for Build my Fast 50")
-    parser.add_argument("files", nargs="+", help="export files (.csv or .vcf)")
+    parser.add_argument("files", nargs="+", help="export files (.csv, .vcf, or LinkedIn's .zip)")
     parser.add_argument("--out", required=True, help="where to write exports.json")
     parser.add_argument("--keywords", default="", help="comma separated words from the investor profile, for the fit hint")
     args = parser.parse_args(argv)
@@ -242,7 +266,9 @@ def main(argv=None):
         if not path.exists():
             print(f"missing file: {f}", file=sys.stderr)
             continue
-        if path.suffix.lower() == ".vcf":
+        if path.suffix.lower() == ".zip":
+            found = parse_linkedin_zip(path, extra_words)
+        elif path.suffix.lower() == ".vcf":
             found = parse_vcard(path, extra_words)
         else:
             found = parse_csv(path, extra_words)

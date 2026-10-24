@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.2, October 24, 2026
+
+From a fresh-eyes review of the one-button flow:
+- LinkedIn's .zip works as it is: the file reader opens Connections.csv inside it and nothing else. Clients are told to upload Connections.csv from the zip in MarcinAI.
+- When Claude can't reach GitHub, START-HERE names the exact switches (Code execution and file creation, Allow network egress), says who turns them on for company plans, and points to the by-hand install instead of stopping.
+- Microsoft 365 wording: MarcinAI only reads; the approval box lists everything the connection could do.
+- Links to Claude's connection page and the contacts pages are full links the client can click.
+- A connected mailbox is confirmed as the business email first. "Not sure" about email asks what the screen says. Microsoft 365 gets an "It didn't work" choice.
+- Google Contacts and Outlook export steps match today's screens. LinkedIn is offered after the profile questions too. "Always allow", the time a busy inbox takes, and usage limits are explained.
+
 ## 1.1.1, October 23, 2026
 
 From the first live run on M1's own account:

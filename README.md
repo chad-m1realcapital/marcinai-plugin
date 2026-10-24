@@ -9,17 +9,17 @@ Your Fast 50 is the first 50 people you talk to about your raise, and the best o
 1. In MarcinAI, press **Start my Fast 50**. It's on Getting started and on the Fast 50 page.
 2. Claude opens with your message already written. Claude shows a "Use caution" note on any message that comes from a link; that's normal. Press the orange arrow to send it.
 3. Claude gets the MarcinAI plugin and shows it with a **Save plugin** button. Press it once. From then on it's in your Claude.
-4. Claude asks you a few questions, one at a time, and helps you connect your email if it isn't connected yet.
-5. When your list is ready, download it and upload it in MarcinAI with **Add contacts**.
+4. Claude asks you a few questions, one at a time, and helps you connect your email if it isn't connected yet. If Claude asks to use your email or calendar, press **Always allow**.
+5. Claude reads your email and calendar. On a busy inbox this can take a while, so keep the tab open. When your list is ready, download it and upload it in MarcinAI with **Add contacts**.
 
 Each time you press **Start my Fast 50**, Claude uses the newest version of the plugin.
 
 ## Your email
 
 - **Gmail or Google Workspace:** Claude connects to Gmail and Google Calendar. Both are read-only.
-- **Outlook through your business (Microsoft 365):** Claude connects to Microsoft 365, also read-only. Your company's Microsoft account owner approves Claude once; at a small firm that's usually you.
+- **Outlook through your business (Microsoft 365):** Claude connects to Microsoft 365. Your company's Microsoft account owner approves Claude once; at a small firm that's usually you. Microsoft's approval box lists everything the Microsoft 365 connection can do. MarcinAI only reads your email and calendar. It never sends, changes or deletes anything.
 - **Outlook.com, Hotmail, Yahoo, AOL or iCloud:** these can't connect to Claude. Claude walks you through exporting your contacts and builds the list from that file.
-- **LinkedIn:** there's no LinkedIn connection. You can download your connections from LinkedIn and attach the file, or upload it in MarcinAI later.
+- **LinkedIn:** there's no LinkedIn connection. LinkedIn emails you a zip file of your data. Double-click it to open it, then attach the file inside called Connections.csv. In MarcinAI, upload that same Connections.csv with **Add contacts**.
 
 ## Installing it by hand instead
 
@@ -42,5 +42,7 @@ It never sends, replies, drafts, labels, archives or deletes mail. It never crea
 
 ## If something is off
 
-- Claude says it can't create files: open **Settings**, then **Capabilities**, and turn on **Code execution and file creation**. On a Team or Enterprise plan an Owner turns this on.
+- Claude says it can't create files or can't reach GitHub: open **Settings**, then **Capabilities**. Turn on **Code execution and file creation** and **Allow network egress** (Package managers only is enough). On a Team or Enterprise plan, your company's Claude owner turns these on under **Organization settings**, then **Capabilities**. Or install it by hand with the steps above.
+- Claude asks you to sign in: sign in, then press **Start my Fast 50** in MarcinAI again.
+- Claude says you've reached a usage limit: wait until the time Claude shows, then type **keep going** in the same chat.
 - Anything else: ask your client success manager. They're under **Get help** in MarcinAI.

@@ -15,7 +15,7 @@ Read this when you handle an attached export (step 5), when you build the file (
 
 | Export | How the client gets it | Columns it carries |
 | :- | :- | :- |
-| LinkedIn connections | Settings and Privacy, Data privacy, Get a copy of your data, Connections (desktop only, arrives by email in minutes) | `First Name, Last Name, URL, Email Address, Company, Position, Connected On`, with three note lines above the header. Email is blank for most connections; that is LinkedIn's privacy setting, not a parser miss. |
+| LinkedIn connections | Settings and Privacy, Data privacy, Get a copy of your data, Connections (desktop only, arrives by email as a .zip, minutes to a day). Pass the .zip as it is or the Connections.csv inside it; from a .zip only Connections.csv is read. | `First Name, Last Name, URL, Email Address, Company, Position, Connected On`, with three note lines above the header. Email is blank for most connections; that is LinkedIn's privacy setting, not a parser miss. |
 | Google Contacts | Google Contacts, Export, Google CSV | Newer files: `First Name, Last Name, Organization Name, Organization Title, E-mail 1 - Value`. Older files: `Given Name, Family Name, Organization 1 - Name, Organization 1 - Title, E-mail 1 - Value`. Both are handled. |
 | Outlook | Outlook, File, Open and Export, Import/Export, Export to a file, Comma Separated Values | `First Name, Last Name, Company, Job Title, E-mail Address` |
 | Outlook.com and Outlook on the web | People, Manage contacts, Export contacts, All contacts, Export | The same Outlook columns. Its `Title` column holds Mr., Dr. and the like; the parser ignores those. |
