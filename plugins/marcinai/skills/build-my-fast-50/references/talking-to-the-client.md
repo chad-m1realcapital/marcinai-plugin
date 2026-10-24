@@ -82,7 +82,7 @@ When this is the only source, say once: "This list is built from your contacts, 
 
 ## Card 2: LinkedIn
 
-Offer once, after the mail is sorted.
+Offer once, right after the profile is settled, whether or not their email is connected.
 
 - Question: "Want to add your LinkedIn connections too?"
 - Choices:
@@ -94,13 +94,9 @@ Offer once, after the mail is sorted.
 
 ## Card 3: confirm the profile from MarcinAI
 
-When the opening message carried "My investor profile from MarcinAI", show it back short:
+When the opening message carried "My investor profile from MarcinAI", the short version goes inside the question, because the card is what the client reads:
 
-> Here's who MarcinAI has you raising for:
-> Raising about $3M for apartment deals you buy and run yourself.
-> Best investors: people who've invested with you before and their referrals; dentists and other high earners near you; business owners who recently sold a company.
-
-- Question: "Is this still who you're raising for?"
+- Question: "MarcinAI has you raising about $3M for one apartment deal, starting with your past investors, dentists near you and business owners who sold a company. Is that still right?"
 - Choices:
   - "Yes, that's right"
   - "Change something"

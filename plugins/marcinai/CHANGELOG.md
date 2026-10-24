@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.1, October 23, 2026
+
+From the first live run on M1's own account:
+- The profile check shows the short profile inside the question card, so the client sees what they are confirming.
+- Right under the plugin file, one line tells the client to press Save plugin and that Claude is starting either way.
+- The LinkedIn offer comes after the profile check every time, not only when the client had to connect their email first.
+- The Start my Fast 50 message the client sees is a few plain lines. The setup steps moved into `START-HERE.md` at the top of the repository.
+
 ## 1.1.0, October 23, 2026
 
 - Starts from the Start my Fast 50 button in MarcinAI. That button opens Claude with the client's investor profile already in the message; Claude gets this plugin from GitHub, offers Claude's own Save plugin button, and starts in the same chat. Saving is optional, so a blocked save never stops the list.
